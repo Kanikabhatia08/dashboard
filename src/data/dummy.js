@@ -620,7 +620,7 @@ export const earningData = [
     percentage: '-4%',
     title: 'Customers',
     iconColor: '#03C9D7',
-    iconBg: '#E5FAFB',
+    iconBg: 'rgb(208 252 255)',
     pcColor: 'red-600',
   },
   {
@@ -628,8 +628,8 @@ export const earningData = [
     amount: '4,396',
     percentage: '+23%',
     title: 'Products',
-    iconColor: 'rgb(255, 244, 229)',
-    iconBg: 'rgb(254, 201, 15)',
+    iconColor: 'rgb(254, 201, 15)',
+    iconBg: 'rgb(240 241 189)',
     pcColor: 'green-600',
   },
   {
@@ -638,7 +638,7 @@ export const earningData = [
     percentage: '+38%',
     title: 'Sales',
     iconColor: 'rgb(228, 106, 118)',
-    iconBg: 'rgb(255, 244, 229)',
+    iconBg: 'rgb(245 221 188)',
 
     pcColor: 'green-600',
   },
@@ -648,7 +648,7 @@ export const earningData = [
     percentage: '-12%',
     title: 'Refunds',
     iconColor: 'rgb(0, 194, 146)',
-    iconBg: 'rgb(235, 250, 242)',
+    iconBg: 'rgb(198 255 225)',
     pcColor: 'red-600',
   },
 ];
