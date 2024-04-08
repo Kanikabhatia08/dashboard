@@ -12,10 +12,10 @@ import {Stacked,SparkLine} from '../components';
 const Ecommerce = () => {
   return (
     <div className='mt-5 '>
-      <div className='flex flex-wrap xxl:flex-nowrap '>
+      <div className='flex flex-wrap  '>
 
       {/* Earnings */}
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-4 
+        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full xl:w-80 p-8 pt-9 m-4 
           bg-hero-pattern bg-no-repeat bg-cover bg-center ">
         
         <div className="flex justify-between items-center">
@@ -26,7 +26,7 @@ const Ecommerce = () => {
           <button
             type="button"
             style={{ backgroundColor: "blue" }}
-            className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+            className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full p-4"
           >
             <BsCurrencyDollar />
           </button>
@@ -44,12 +44,12 @@ const Ecommerce = () => {
       </div>
 
       {/* Earnings Map */}
-      <div className='columns-4 my-3 mx-1 flex justify-center gap-4 items-center'>
+      <div className='flex m-4 md:m-0 flex-wrap justify-center gap-4 items-center'>
         { 
           earningData.map((item) => (
             <div
               key={item.title}
-              className='bg-white dark:text-gray-200 dark:bg-secondary-dark-bg md:w-48 p-4 pt-9 rounded-2xl'
+              className='bg-white h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-48 p-4 pt-9 rounded-2xl'
             >
               <button type='button' style={{color: item.iconColor, backgroundColor: item.iconBg}}
                 className='text-2xl bg-opacity-10 rounded-full p-4 hover:drop-shadow-xl'>
