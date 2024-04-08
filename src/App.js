@@ -26,7 +26,7 @@ function App() {
           </div>
           {
             activeMenu ? 
-            (<div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
+            (<div className=" w-64 fixed sidebar dark:bg-secondary-dark-bg bg-white">
               <Sidebar/>
             </div>) :
             (<div className="w-0 dark:bg-secondary-dark-bg">
@@ -34,7 +34,7 @@ function App() {
             </div>)
           }
           <div className={`dark:bg-main-bg bg-main-bg min-h-screen w-full
-              ${activeMenu ? ' md:ml-72 w-full' : 'flex-2'}`
+              ${activeMenu ? ' md:ml-64 w-full' : 'flex-2'}`
           }>
             <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
               <Navbar/>
