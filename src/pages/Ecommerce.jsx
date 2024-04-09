@@ -6,8 +6,7 @@ import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 import { earningData, medicalproBranding, recentTransactions, weeklyStats, dropdownData, SparklineAreaData, ecomPieChartData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 import product9 from '../data/product9.jpg';
-import { Button } from '../components';
-import {Stacked,SparkLine} from '../components';
+import {Stacked, SparkLine, Button, Pie } from '../components';
 
 const Ecommerce = () => {
 
@@ -15,10 +14,10 @@ const Ecommerce = () => {
 
   return (
     <div className='mt-5 '>
-      <div className='flex flex-wrap justify-center  '>
+      <div className='flex flex-wrap justify-center '>
 
       {/* Earnings */}
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full md:w-72 p-8 pt-9 m-4 
+        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full xl:w-72 p-8 m-4  
           bg-hero-pattern bg-no-repeat bg-cover bg-center ">
         
         <div className="flex justify-between items-center">
@@ -47,7 +46,7 @@ const Ecommerce = () => {
       </div>
 
       {/* Earnings Map */}
-      <div className='flex m-4 md:m-0 flex-wrap justify-center gap-4 items-center'>
+      <div className='flex m-4 md:m-0 flex-wrap justify-center gap-5 items-center'>
         { 
           earningData.map((item) => (
             <div
@@ -70,12 +69,12 @@ const Ecommerce = () => {
       </div>
 
       {/* Revenue Updates */}
-      <div className='flex gap-10 flex-wrap justify-center'>
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg m-4 p-4 rounded-2xl md:w-780  ">
+      <div className='flex gap-6 flex-wrap justify-center '>
+      <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg my-3 p-4 rounded-2xl md:w-780  ">
           <div className='flex justify-between'>
             <p className="font-semibold text-xl">Revenue Updates</p>
             <div className='flex items-center gap-4'>
-              <p className='flex items-center text-gray-600 hover:drop-shadow-xl'>
+              <p className='flex items-center gap-2 text-gray-600 hover:drop-shadow-xl'>
                 <span><GoDotFill /></span>
                 <span>Expense</span>
               </p>
@@ -132,12 +131,42 @@ const Ecommerce = () => {
                 width="360px"
               />
             </div>
+          </div>
+        </div>
+      
+      
 
+      {/* sparkLine and pie chart */}
+      <div className='flex xl:flex-wrap lg:w-[28%] justify-center '>
+          <div
+            className=" rounded-2xl p-3 m-4 "
+            style={{ backgroundColor: currentColor }}
+          >
+            <div className="flex justify-between items-center ">
+              <p className="font-semibold text-white text-2xl">Earnings</p>
+
+              <div>
+                <p className="text-2xl text-white font-semibold mt-4">$63,448.78</p>
+                <p className="text-gray-200">Monthly revenue</p>
+              </div>
+            </div>
+
+            <div className="pt-9">
+              <SparkLine currentColor="white" id="column-sparkLine" height="100px" type="Column" data={SparklineAreaData} width="300" color="rgb(242, 252, 253)" />
+            </div>
           </div>
 
-          
-        </div>
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl px-8 mb-4 flex justify-center items-center gap-4">
+            <div>
+              <p className="text-2xl font-semibold ">$43,246</p>
+              <p className="text-gray-400">Yearly sales</p>
+            </div>
 
+            <div className="w-40">
+              <Pie id="pie-chart" data={ecomPieChartData} legendVisiblity={false} height="160px" />
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>

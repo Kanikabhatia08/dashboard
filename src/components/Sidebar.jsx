@@ -17,6 +17,7 @@ const Sidebar = () => {
       setActiveMenu(false);
     }
   }
+  
   return (
     <div className='ml-3 pb-10 h-screen  overflow-auto md:overflow-hidden md:hover:overflow-auto'>
       { activeMenu && 

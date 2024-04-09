@@ -10,11 +10,12 @@ function App() {
 
   const {activeMenu,currentMode, themeSettings, setThemeSettings, currentColor} = useStateContext();
 
+
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
         <div className="flex relative dark:bg-main-dark-bg">
-          <div className="fixed right-4 bottom-4 z-1000">
+          <div className="fixed right-4 bottom-4 z-10">
             <TooltipComponent content="Settings" position="Top">
               <button type="button"
                 className="text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white" 
@@ -35,7 +36,7 @@ function App() {
             </div>)
           }
           <div className={`dark:bg-main-dark-bg bg-main-bg min-h-screen w-full
-              ${activeMenu ? ' md:ml-64 w-full' : 'flex-2'}`
+              ${activeMenu ? ' md:ml-64 w-full' : ''}`
           }>
             <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
               <Navbar/>
