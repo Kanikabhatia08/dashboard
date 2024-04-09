@@ -7,24 +7,27 @@ import { ColumnDirective } from '@syncfusion/ej2-react-charts'
 
 const Employees = () => {
   return (
-    <div className='m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl'>
+    <div className='m-2 md:m-10 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl'>
       <Header category="Page" title="Employees" />
-      <GridComponent 
-        dataSource={employeesData}
-        allowPaging
-        allowSorting
-        toolbar={['Search']}
-        width='auto'
-      >
-        <ColumnsDirective>
-          {
-            employeesGrid.map((item,index) =>(
-              <ColumnDirective key={index} {...item} />
-            ))
-          }
-        </ColumnsDirective>
-        <Inject services={[Search, Page, Toolbar  ]} />
-      </GridComponent>
+      <div className='p-3 bg-white rounded-3xl'>
+        <GridComponent 
+          dataSource={employeesData}
+          allowPaging
+          allowSorting
+          toolbar={['Search']}
+          width='auto'
+        >
+          <ColumnsDirective>
+            {
+              employeesGrid.map((item,index) =>(
+                <ColumnDirective key={index} {...item} />
+              ))
+            }
+          </ColumnsDirective>
+          <Inject services={[Search, Page, Toolbar  ]} />
+        </GridComponent>
+      </div>
+
     </div>
   )
 }

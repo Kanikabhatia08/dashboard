@@ -9,7 +9,7 @@ const SparkLine = ({id, height, width, data, type, color,currentColor}) => {
       width={width}
       lineWidth={1}
       valueType="Numeric"
-      fill={color}
+      fill={currentColor}
       border={{ color: currentColor, width: 2 }}
       tooltipSettings={{
         visible: true,
