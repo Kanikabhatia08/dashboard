@@ -11,14 +11,21 @@ const initialState = {
 }
 
 export const ContextProvider = ({children}) =>{
+    const getTheme = () =>{
+        const theme = localStorage.getItem('themeMode')
+        return theme;
+    }
+    const getColor = () =>{
+        const color = localStorage.getItem('colorMode')
+        return color;
+    }
 
     const [activeMenu, setActiveMenu] = useState(true);
     const [isClicked, setIsClicked] = useState(initialState);
     const [screenSize, setScreenSize] = useState(initialState);
-    const [currentColor, setCurrentColor] = useState("#03C9D7");
-    const [currentMode, setCurrentMode] = useState("light");
+    const [currentColor, setCurrentColor] = useState(getColor());
+    const [currentMode, setCurrentMode] = useState(getTheme());
     const [themeSettings, setThemeSettings] = useState(false);
-
 
     const handleClick = (clicked) =>{
         setIsClicked({...initialState, [clicked] : true })

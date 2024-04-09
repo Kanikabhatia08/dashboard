@@ -10,7 +10,7 @@ import {Stacked, SparkLine, Button, Pie } from '../components';
 
 const Ecommerce = () => {
 
-  const {currentColor} = useStateContext();
+  const {currentColor, activeMenu} = useStateContext();
 
   return (
     <div className='mt-5 '>
@@ -69,8 +69,8 @@ const Ecommerce = () => {
       </div>
 
       {/* Revenue Updates */}
-      <div className='flex gap-6 flex-wrap justify-center '>
-      <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg my-3 p-4 rounded-2xl md:w-780  ">
+      <div className={`flex ml-4 ${activeMenu ? 'gap-8': 'gap-0 ml-12'} flex-wrap justify-center `}>
+      <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg my-3 p-4  rounded-2xl md:w-780  ">
           <div className='flex justify-between'>
             <p className="font-semibold text-xl">Revenue Updates</p>
             <div className='flex items-center gap-4'>
@@ -137,7 +137,7 @@ const Ecommerce = () => {
       
 
       {/* sparkLine and pie chart */}
-      <div className='flex xl:flex-wrap lg:w-[28%] justify-center '>
+      <div className='flex xl:flex-wrap lg:w-[28%]  justify-center '>
           <div
             className=" rounded-2xl p-3 m-4 "
             style={{ backgroundColor: currentColor }}
