@@ -17,9 +17,15 @@ const Sidebar = () => {
       setActiveMenu(false);
     }
   }
+  const userLoggedIn = JSON.parse(localStorage.getItem('userLoggedIn'));
+
   
   return (
-    <div className='ml-3 pb-10 h-screen  overflow-auto md:overflow-hidden md:hover:overflow-auto'>
+    <div>
+      {
+        userLoggedIn ?
+
+        <div className='ml-3 pb-10 h-screen  overflow-auto md:overflow-hidden md:hover:overflow-auto'>
       { activeMenu && 
         (<>
           <div className='flex justify-between items-center'>
@@ -61,6 +67,13 @@ const Sidebar = () => {
           </div>
         </>)}
     </div>
+    :
+    <div className='w-0'>
+    </div>
+
+      }
+    </div>
+    
   )
 }
 

@@ -1,3 +1,6 @@
+const { Font } = require("@syncfusion/ej2-react-charts");
+const { fontColor } = require("@syncfusion/ej2/spreadsheet");
+
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'class',
@@ -9,6 +12,9 @@ module.exports = {
     extend: {
       fontSize: {
         14: '14px',
+      },
+      fontColor:{
+        'lightblue': 'rgb(3, 201, 215)',
       },
       backgroundColor: {
         'main-bg': '#E5E7EB ',

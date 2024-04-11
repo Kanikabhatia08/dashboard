@@ -1,16 +1,14 @@
 import React from 'react';
 import { BsCurrencyDollar } from 'react-icons/bs';
 import { GoDotFill } from "react-icons/go"
-import { IoIosMore } from 'react-icons/io';
-import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
-import { earningData, medicalproBranding, recentTransactions, weeklyStats, dropdownData, SparklineAreaData, ecomPieChartData } from '../data/dummy';
+import { earningData, SparklineAreaData, ecomPieChartData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
-import product9 from '../data/product9.jpg';
 import {Stacked, SparkLine, Button, Pie } from '../components';
 
 const Ecommerce = () => {
 
   const {currentColor, activeMenu} = useStateContext();
+  console.log(currentColor)
 
   return (
     <div className='mt-5 '>
@@ -67,6 +65,7 @@ const Ecommerce = () => {
           ))
         }
       </div>
+      
 
       {/* Revenue Updates */}
       <div className={`flex ml-4 ${activeMenu ? 'gap-8': 'gap-0 ml-12'} flex-wrap justify-center `}>
