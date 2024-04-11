@@ -1,13 +1,13 @@
-import React from 'react'
-import { Header } from '../components'
+import React, { Suspense } from 'react'
 import {Inject, ColumnsDirective, GridComponent, Page, Search, Toolbar, PdfExport } from '@syncfusion/ej2-react-grids'
 import { employeesData, employeesGrid } from '../data/dummy'
 import { ColumnDirective } from '@syncfusion/ej2-react-charts'
+import Loading from '../components/Loading'
 
+const Header = React.lazy(() => import('../components/Header'));
 
 const Employees = () => {
   let grid;
-  const toolbar = ['PdfExport'];
   const toolbarClick = (args) => {
     if (grid && 'Grid_pdfexport') {
       grid.pdfExport();
@@ -15,7 +15,11 @@ const Employees = () => {
   }
   return (
     <div className='m-2 md:m-10 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl'>
-      <Header category="Page" title="Employees" />
+      <Suspense fallback={<Loading/>}>
+        <Header category="Page" title="Employees" />
+      </Suspense>
+
+      
       <div className='p-3 bg-white rounded-3xl'>
         <GridComponent 
           dataSource={employeesData}

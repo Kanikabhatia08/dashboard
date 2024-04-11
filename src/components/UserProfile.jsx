@@ -1,6 +1,7 @@
 import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 import { Button } from '.';
+import user from '../data/user.jpeg'
 import { userProfileData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 import { useNavigate } from 'react-router-dom'
@@ -31,12 +32,12 @@ const UserProfile = () => {
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
         <img
           className="rounded-full h-24 w-24"
-          src={userObject.picture}
+          src={userObject? userObject.picture : user}
           alt="user-profile"
         />
         <div>
-          <p className="font-semibold text-xl dark:text-gray-200"> {userObject.name}</p>
-          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {userObject.email} </p>
+          <p className="font-semibold text-xl dark:text-gray-200"> {userObject? userObject.name : 'User'}</p>
+          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {userObject? userObject.email : 'email'} </p>
         </div>
       </div>
       <div>

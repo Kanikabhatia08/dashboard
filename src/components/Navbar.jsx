@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import logo from '../data/logo.png'
+import user from '../data/user.jpeg'
 import { AiOutlineMenu } from 'react-icons/ai';
 import { FiShoppingCart } from 'react-icons/fi';
 import { BsChatLeft } from 'react-icons/bs';
@@ -6,10 +8,8 @@ import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import {useNavigate} from 'react-router-dom'
-import avatar from '../data/avatar.jpg';
 import { Cart, Chat, Notification, UserProfile } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
-import logo from '../data/logo.png'
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -58,10 +58,6 @@ const Navbar = () => {
   const userLoggedIn = JSON.parse(localStorage.getItem('userLoggedIn'));
   const navigate = useNavigate();
 
-    const logout = () =>{
-        localStorage.setItem('userLoggedIn', JSON.stringify('false'));
-        navigate('/login') 
-    }
   return (
     <div>
       {
@@ -94,7 +90,7 @@ const Navbar = () => {
                 >
                   <img
                     className="rounded-full w-8 h-8"
-                    src={userObject.picture}
+                    src={userObject? userObject.picture : user}
                     alt="user-profile"
                   />
                   <p>

@@ -1,19 +1,20 @@
+import React, { lazy, Suspense, } from "react";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { FiSettings } from "react-icons/fi";
-import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
+import { Navbar, Sidebar, ThemeSettings } from './components';
 import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
 import { useStateContext } from "./contexts/ContextProvider";
-import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
+const Login = React.lazy(() => import('./pages/Auth/Login'));
 
 function App() {
 
   const {activeMenu,currentMode, themeSettings, setThemeSettings, currentColor} = useStateContext();
-console.log(activeMenu)
 
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>

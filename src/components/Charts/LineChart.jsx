@@ -1,5 +1,4 @@
 import { ChartComponent, DateTime, Legend, LineSeries, Tooltip, Inject, SeriesCollectionDirective, SeriesDirective } from '@syncfusion/ej2-react-charts'
-import React from 'react'
 import { LinePrimaryXAxis, LinePrimaryYAxis, lineCustomSeries } from '../../data/dummy'
 import { useStateContext } from '../../contexts/ContextProvider';
 

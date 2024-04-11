@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, HiloSeries, Tooltip, DateTime, Zoom, Logarithmic, Crosshair } from '@syncfusion/ej2-react-charts';
 
 import { financialChartData, FinancialPrimaryXAxis, FinancialPrimaryYAxis } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
-import { Header } from '../../components';
+import Loading from '../../components/Loading';
+const Header = React.lazy(() => import('../../components/Header'));
 
 const date1 = new Date('2017, 1, 1');
 
@@ -19,7 +20,9 @@ const Financial = () => {
 
   return (
     <div className="m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
-      <Header category="Financial" title="AAPLE Historical" />
+      <Suspense fallback={<Loading/>}>
+        <Header category="Financial" title="AAPLE Historical" />
+      </Suspense>
       <div className="w-full">
         <ChartComponent
           id="charts"

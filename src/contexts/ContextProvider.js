@@ -30,7 +30,7 @@ export const ContextProvider = ({children}) =>{
     console.log(activeMenu)
 
     const handleClick = (clicked) =>{
-        setIsClicked({...initialState, [clicked] : true })
+        setIsClicked({...initialState, [clicked] : [!clicked] })
     }
 
     const setMode = (e) =>{

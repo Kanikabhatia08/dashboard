@@ -1,14 +1,17 @@
-import React from 'react'
-import { Header } from '../components'
+import React, { Suspense } from 'react';
 import {Inject, ColumnsDirective, ContextMenu, Edit, ExcelExport, Filter, GridComponent, Page, PdfExport, Resize, Sort } from '@syncfusion/ej2-react-grids'
 import { ordersData, ordersGrid } from '../data/dummy'
 import { ColumnDirective } from '@syncfusion/ej2-react-charts'
+import Loading from '../components/Loading';
+const Header = React.lazy(() => import('../components/Header'));
 
 
 const Orders = () => {
   return (
     <div className='m-2 md:m-10 p-2 md:p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl'>
-      <Header category="Page" title="Orders" />
+      <Suspense fallback={<Loading/>}>
+        <Header category="Page" title="Orders" />
+      </Suspense>
       <div className='p-3 bg-white rounded-3xl'>
         <GridComponent 
           id='gridcomp' 

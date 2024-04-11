@@ -12,9 +12,7 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isRegistering, setIsRegistering] = useState(false)
-    const [errorMessage, setErrorMessage] = useState('')
     const {currentcolor, setUserObject} = useStateContext();
-    console.log(currentcolor);
 
     const navigate = useNavigate()
     

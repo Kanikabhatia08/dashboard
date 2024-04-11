@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import login from '../../data/login.png'
 import { jwtDecode } from 'jwt-decode'
 import { GoogleLogin } from '@react-oauth/google';
 import { Link } from 'react-router-dom';
-import {toast} from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom'
 import { useStateContext } from '../../contexts/ContextProvider';
 
@@ -11,15 +11,9 @@ import { useStateContext } from '../../contexts/ContextProvider';
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [isSigningIn, setIsSigningIn] = useState(false)
-    const [errorMessage, setErrorMessage] = useState('')
-    
+    const [isSigningIn, setIsSigningIn] = useState(false)    
     const navigate = useNavigate()
     const {setUserObject,setActiveMenu} = useStateContext();
-
-    useEffect(() => {
-        localStorage.setItem('userLoggedIn', JSON.stringify(isSigningIn));
-    }, [isSigningIn]);
     
     const submitHandler =(e) =>{
         e.preventDefault();
@@ -33,11 +27,13 @@ const Login = () => {
         else{
             setIsSigningIn(true);
             navigate("/ecommerce");
-            setActiveMenu(true)
+            setActiveMenu(true);
+            localStorage.setItem('userLoggedIn', JSON.stringify('true'));
+            console.log(isSigningIn, "signin?")
         }
     }
 
-  return (
+return (
     <div className='w-[90%] mx-auto justify-center flex gap-8 '>
         <div>
             <img src={login} alt='login' loading='lazy' />
@@ -78,6 +74,7 @@ const Login = () => {
                         className={`w-full px-4 py-2 my-2 text-white font-medium rounded-lg ${isSigningIn ? 'bg-gray-300 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700 hover:shadow-xl transition duration-300'}`}
                     >
                         {isSigningIn ? 'Signing In...' : 'Sign In'}
+                        <Toaster />
                 </button>
 
                 <div className='flex flex-row text-center w-full'>

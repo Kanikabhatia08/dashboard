@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { AccumulationChartComponent, AccumulationSeriesCollectionDirective, AccumulationSeriesDirective, Inject, AccumulationLegend, AccumulationDataLabel, AccumulationTooltip, PyramidSeries, AccumulationSelection } from '@syncfusion/ej2-react-charts';
 import { PyramidData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
-import { Header } from '../../components';
+import Loading from '../../components/Loading';
+const Header = React.lazy(() => import('../../components/Header'));
 
 const Pyramid = () => {
   
@@ -10,7 +11,9 @@ const Pyramid = () => {
 
   return (
     <div className="m-4 md:m-10 mt-24  p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
-      <Header category="Pyramid" title="Food Comparison Chart" />
+      <Suspense fallback={<Loading/>}>
+        <Header category="Pyramid" title="Food Comparison Chart" />
+      </Suspense>
       <div className="w-full">
         <AccumulationChartComponent
           id="pyramid-chart"

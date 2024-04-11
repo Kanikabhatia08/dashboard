@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { Suspense} from 'react';
 import { BsCurrencyDollar } from 'react-icons/bs';
 import { GoDotFill } from "react-icons/go"
+import Loading from '../components/Loading';
 import { earningData, SparklineAreaData, ecomPieChartData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
-import {Stacked, SparkLine, Button, Pie } from '../components';
+
+const Stacked = React.lazy(() => import('../components/Charts/Stacked'));
+const SparkLine = React.lazy(() => import('../components/Charts/SparkLine'));
+const Button = React.lazy(() => import('../components/Button'));
+const Pie = React.lazy(() => import('../components/Charts/Pie'));
 
 const Ecommerce = () => {
 
   const {currentColor, activeMenu} = useStateContext();
-  console.log(currentColor)
 
   return (
     <div className='mt-5 '>
@@ -33,13 +37,16 @@ const Ecommerce = () => {
         </div>
 
         <div className='mt-6'>
-          <Button 
-            color="white"
-            bgColor={currentColor}
-            text="Download"
-            borderRadius="10px"
-            size="md"
-          />
+          <Suspense fallback={<Loading/>}>
+            <Button 
+              color="white"
+              bgColor={currentColor}
+              text="Download"
+              borderRadius="10px"
+              size="md"
+            />
+          </Suspense>
+          
         </div>
       </div>
 
@@ -103,32 +110,40 @@ const Ecommerce = () => {
               </div>
 
               <div className=''>
-                <SparkLine 
-                  currentColor={currentColor}
-                  id="line-sparkline"
-                  type="Line"
-                  height="80px"
-                  width="250px"
-                  data={SparklineAreaData}
-                  color={currentColor}
-                />
+                <Suspense fallback={<Loading/>}>
+                  <SparkLine 
+                    currentColor={currentColor}
+                    id="line-sparkline"
+                    type="Line"
+                    height="80px"
+                    width="250px"
+                    data={SparklineAreaData}
+                    color={currentColor}
+                  />
+                </Suspense>
+                
               </div>
               <div className='mt-10'>
-                <Button
-                  color="white"
-                  bgColor={currentColor}
-                  text="Download Report"
-                  borderRadius="10px"
-                />
+              <Suspense fallback={<div><Loading/></div>}>
+                  <Button
+                    color="white"
+                    bgColor={currentColor}
+                    text="Download Report"
+                    borderRadius="10px"
+                  />
+                </Suspense>
               </div>
 
             </div>
             {/* Stacked chart */}
             <div>
-              <Stacked
-                height="320px"
-                width="360px"
-              />
+              <Suspense fallback={<Loading/>}>
+                <Stacked
+                  height="320px"
+                  width="360px"
+                />
+              </Suspense>
+              
             </div>
           </div>
         </div>
@@ -151,7 +166,9 @@ const Ecommerce = () => {
             </div>
 
             <div className="pt-9">
+            <Suspense fallback={<Loading/>}>
               <SparkLine currentColor="white" id="column-sparkLine" height="100px" type="Column" data={SparklineAreaData} width="300" color="rgb(242, 252, 253)" />
+            </Suspense>
             </div>
           </div>
 
@@ -162,7 +179,9 @@ const Ecommerce = () => {
             </div>
 
             <div className="w-40">
+            <Suspense fallback={<Loading/>}>
               <Pie id="pie-chart" data={ecomPieChartData} legendVisiblity={false} height="160px" />
+            </Suspense>
             </div>
           </div>
         </div>
