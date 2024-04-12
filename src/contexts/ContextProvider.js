@@ -16,8 +16,12 @@ export const ContextProvider = ({children}) =>{
     }
     const getColor = () =>{
         const color = localStorage.getItem('colorMode')
-        return color;
+        if(color){
+            return color
+        }
+        return '#1A97F5'
     }
+
 
     const [activeMenu, setActiveMenu] = useState(false);
     const [isClicked, setIsClicked] = useState(initialState);
@@ -37,8 +41,9 @@ export const ContextProvider = ({children}) =>{
     }
 
     const setColor = (color) =>{
-        console.log(color)
         setCurrentColor(color);
+        console.log(color)
+
         localStorage.setItem('colorMode', color)
         setThemeSettings(false);
     }

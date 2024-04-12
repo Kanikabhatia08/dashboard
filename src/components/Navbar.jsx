@@ -56,11 +56,10 @@ const Navbar = () => {
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
   const ProfileRef = useRef();
-  const NotificationRef = useRef();
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      if (NotificationRef.current && !NotificationRef.current.contains(event.target) || ProfileRef.current && !ProfileRef.current.contains(event.target) ) {
+      if (ProfileRef.current && !ProfileRef.current.contains(event.target) ) {
         // console.log(ProfileRef.current)
         setIsClicked({
           cart: false,
@@ -77,12 +76,12 @@ const Navbar = () => {
   });
 
   return (
-    <div >
+    <div ref={ProfileRef}>
       {
         userLoggedIn ?
         <>
           <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative" >
-            <NavButton title="Menu"  customFunc={handleActiveMenu} color={currentColor} icon={<AiOutlineMenu />} />
+            <NavButton title="Menu"  customFunc={handleActiveMenu}  color={currentColor} icon={<AiOutlineMenu />} />
             <div className="flex">
               <NavButton 
                 title="Cart" 
@@ -95,18 +94,15 @@ const Navbar = () => {
                 customFunc={() => handleClick('chat')} 
                 color={currentColor} icon={<BsChatLeft />} 
               />
-              <div ref={NotificationRef}>
                 <NavButton 
                   title="Notification" 
                   dotColor="rgb(254, 201, 15)" 
                   customFunc={() => handleClick('notification')} 
                   color={currentColor} icon={<RiNotification3Line />} 
                 />
-              </div>
               
               <TooltipComponent content="Profile" position="BottomCenter">
                 <div
-                  ref={ProfileRef}
                   className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
                   onClick={() => handleClick('userProfile')}
                 >

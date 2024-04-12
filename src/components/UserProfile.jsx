@@ -63,7 +63,7 @@ const UserProfile = () => {
             style={{ backgroundColor: currentColor }}
             className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full p-4"
             onClick={() => { doSignOut().then(() => {
-              // window.location.reload();
+              window.location.reload();
               <Navigate to={'/login'} replace={true}/> ;
           }) }}
           >
