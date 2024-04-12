@@ -12,7 +12,7 @@ import { useAuth } from '../contexts/AuthContext';
 const UserProfile = () => {
   const { currentColor } = useStateContext();
   const {currentUser} = useAuth()
-  console.log(currentUser,"details")
+  // console.log(currentUser,"details")
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">

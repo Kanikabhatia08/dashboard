@@ -60,7 +60,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      if (ProfileRef.current && !ProfileRef.current.contains(event.target) || NotificationRef.current && !NotificationRef.current.contains(event.target) ) {
+      if (NotificationRef.current && !NotificationRef.current.contains(event.target) || ProfileRef.current && !ProfileRef.current.contains(event.target) ) {
         // console.log(ProfileRef.current)
         setIsClicked({
           cart: false,
@@ -95,16 +95,18 @@ const Navbar = () => {
                 customFunc={() => handleClick('chat')} 
                 color={currentColor} icon={<BsChatLeft />} 
               />
-              <NavButton 
-                ref={NotificationRef}
-                title="Notification" 
-                dotColor="rgb(254, 201, 15)" 
-                customFunc={() => handleClick('notification')} 
-                color={currentColor} icon={<RiNotification3Line />} 
-              />
+              <div ref={NotificationRef}>
+                <NavButton 
+                  title="Notification" 
+                  dotColor="rgb(254, 201, 15)" 
+                  customFunc={() => handleClick('notification')} 
+                  color={currentColor} icon={<RiNotification3Line />} 
+                />
+              </div>
+              
               <TooltipComponent content="Profile" position="BottomCenter">
                 <div
-                ref={ProfileRef}
+                  ref={ProfileRef}
                   className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
                   onClick={() => handleClick('userProfile')}
                 >
