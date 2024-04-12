@@ -26,9 +26,9 @@ export const ContextProvider = ({children}) =>{
     const [currentMode, setCurrentMode] = useState(getTheme());
     const [themeSettings, setThemeSettings] = useState(false);
 
-    const handleClick = (clicked) =>{
-        setIsClicked({...initialState, [clicked] : [!clicked] })
-    }
+    const handleClick = (clicked) => {
+        setIsClicked({ ...isClicked, [clicked]: !isClicked[clicked] });
+    };
 
     const setMode = (e) =>{
         setCurrentMode(e.target.value);

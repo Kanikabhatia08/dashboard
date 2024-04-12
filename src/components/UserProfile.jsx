@@ -10,7 +10,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 
 const UserProfile = () => {
-  const { currentColor, userObject } = useStateContext();
+  const { currentColor } = useStateContext();
   const {currentUser} = useAuth()
   console.log(currentUser,"details")
 
@@ -28,7 +28,7 @@ const UserProfile = () => {
       </div>
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
         <img
-          className="rounded-full h-24 w-24"
+          className="rounded-full size-24"
           src={currentUser.photoURL ?? user }
           alt="user-profile"
         />
@@ -41,6 +41,7 @@ const UserProfile = () => {
         {userProfileData.map((item, index) => (
           <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
             <button
+              onClick={() =><Navigate to={item.navigate} replace={true} />}
               type="button"
               style={{ color: item.iconColor, backgroundColor: item.iconBg }}
               className=" text-xl rounded-lg p-3 hover:bg-light-gray"
@@ -61,7 +62,8 @@ const UserProfile = () => {
             type="button"
             style={{ backgroundColor: currentColor }}
             className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full p-4"
-            onClick={() => { doSignOut().then(() => { 
+            onClick={() => { doSignOut().then(() => {
+              // window.location.reload();
               <Navigate to={'/login'} replace={true}/> ;
           }) }}
           >

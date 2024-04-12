@@ -26,7 +26,7 @@ const Sidebar = () => {
       {
         userLoggedIn ?
 
-        <div className='ml-3 pb-10 h-screen  overflow-auto md:overflow-hidden md:hover:overflow-auto'>
+        <div className='ml-3 pb-10 h-screen overflow-auto md:overflow-hidden md:hover:overflow-auto'>
       { activeMenu && 
         (<>
           <div className='flex justify-between items-center'>

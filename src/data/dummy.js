@@ -64,7 +64,7 @@ export const kanbanGrid = [
 const gridEmployeeProfile = (props) => (
   <div className="flex items-center gap-2">
     <img
-      className="rounded-full w-10 h-10"
+      className="rounded-full size-10"
       src={props.EmployeeImage}
       alt="employee"
     />
@@ -123,7 +123,7 @@ export const EditorData = () => (
 const customerGridImage = (props) => (
   <div className="image flex gap-4">
     <img
-      className="rounded-full w-10 h-10"
+      className="rounded-full size-10"
       src={props.CustomerImage}
       alt="employee"
     />
@@ -136,7 +136,7 @@ const customerGridImage = (props) => (
 
 const customerGridStatus = (props) => (
   <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
-    <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
+    <p style={{ background: props.StatusBg }} className="rounded-full size-3" />
     <p>{props.Status}</p>
   </div>
 );
@@ -853,6 +853,7 @@ export const userProfileData = [
     desc: 'Account Settings',
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
+    navigate: '/'
   },
   {
     icon: <BsShield />,
@@ -860,6 +861,8 @@ export const userProfileData = [
     desc: 'Messages & Emails',
     iconColor: 'rgb(0, 194, 146)',
     iconBg: 'rgb(235, 250, 242)',
+    navigate: '/'
+
   },
   {
     icon: <FiCreditCard />,
@@ -867,6 +870,8 @@ export const userProfileData = [
     desc: 'To-do and Daily Tasks',
     iconColor: 'rgb(255, 244, 229)',
     iconBg: 'rgb(254, 201, 15)',
+    navigate: '/kanban'
+
   },
 ];
 

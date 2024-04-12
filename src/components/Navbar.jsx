@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import logo from '../data/logo.png'
 import user from '../data/user.jpeg'
 import { AiOutlineMenu } from 'react-icons/ai';
@@ -21,7 +21,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
     >
       <span
         style={{ background: dotColor }}
-        className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
+        className="absolute inline-flex rounded-full size-2 right-2 top-2"
       />
       {icon}
     </button>
@@ -29,7 +29,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Navbar = () => {
-  const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
+  const { currentColor, activeMenu, setActiveMenu, handleClick, setIsClicked, isClicked, setScreenSize, screenSize } = useStateContext();
   const {userLoggedIn, currentUser} = useAuth();
   
   useEffect(() => {
@@ -55,14 +55,34 @@ const Navbar = () => {
   }, [screenSize]);
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
+  const ProfileRef = useRef();
+  const NotificationRef = useRef();
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (ProfileRef.current && !ProfileRef.current.contains(event.target) || NotificationRef.current && !NotificationRef.current.contains(event.target) ) {
+        // console.log(ProfileRef.current)
+        setIsClicked({
+          cart: false,
+          chat: false,
+          notification: false,
+          userProfile: false,
+        });
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  });
 
   return (
-    <div>
+    <div >
       {
         userLoggedIn ?
         <>
-          <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
-            <NavButton title="Menu" customFunc={handleActiveMenu} color={currentColor} icon={<AiOutlineMenu />} />
+          <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative" >
+            <NavButton title="Menu"  customFunc={handleActiveMenu} color={currentColor} icon={<AiOutlineMenu />} />
             <div className="flex">
               <NavButton 
                 title="Cart" 
@@ -76,6 +96,7 @@ const Navbar = () => {
                 color={currentColor} icon={<BsChatLeft />} 
               />
               <NavButton 
+                ref={NotificationRef}
                 title="Notification" 
                 dotColor="rgb(254, 201, 15)" 
                 customFunc={() => handleClick('notification')} 
@@ -83,27 +104,28 @@ const Navbar = () => {
               />
               <TooltipComponent content="Profile" position="BottomCenter">
                 <div
+                ref={ProfileRef}
                   className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
                   onClick={() => handleClick('userProfile')}
                 >
                   <img
-                    className="rounded-full w-8 h-8"
+                    className="rounded-full size-8"
                     src={ currentUser.photoURL ?? user}
                     alt="user-profile"
                   />
                   <p>
                     <span className="text-gray-400 text-14">Hi,</span>{' '}
                     <span className="text-gray-400 font-bold ml-1 text-14">
-                      {currentUser.displayName && currentUser.email}
+                      {currentUser.displayName ?? currentUser.email}
                     </span>
                   </p>
                   <MdKeyboardArrowDown className="text-gray-400 text-14" />
                 </div>
               </TooltipComponent>
 
-              {isClicked.cart && (<Cart />)}
-              {isClicked.chat && (<Chat />)}
-              {isClicked.notification && (<Notification />)}
+              {/* {isClicked.cart && (<Cart />)}
+              {isClicked.chat && (<Chat />)} */}
+              {isClicked.notification && (<Notification />)} 
               {isClicked.userProfile && (<UserProfile />)}
             </div>
           </div>
@@ -111,7 +133,7 @@ const Navbar = () => {
         :
         <>
         <div className='m-10 flex gap-1'>
-          <img src={logo} alt='logo' className='w-10 h-10'/>
+          <img src={logo} alt='logo' className='size-10'/>
           <p className='text-4xl font-extrabold dark:text-white'>Shoppy</p>
         </div>
         </>

@@ -75,7 +75,7 @@ const Ecommerce = () => {
       
 
       {/* Revenue Updates */}
-      <div className={`flex ml-4 ${activeMenu ? 'gap-8': 'gap-0 ml-12'} flex-wrap justify-center `}>
+      <div className={`flex ml-4 ${activeMenu ? 'gap-8': ' ml-[55px]'} f flex-wrap justify-center `}>
       <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg my-3 p-4  rounded-2xl md:w-780  ">
           <div className='flex justify-between'>
             <p className="font-semibold text-xl">Revenue Updates</p>

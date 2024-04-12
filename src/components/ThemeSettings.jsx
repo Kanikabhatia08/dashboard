@@ -67,7 +67,7 @@ const ThemeSettings = () => {
                   <div className='relative mt-2 cursor-pointer flex items-center gap-5'>
                     <button 
                       type='button' 
-                      className='h-10 w-10 rounded-full cursor-pointer'
+                      className='size-10 rounded-full cursor-pointer'
                       style={{backgroundColor : item.color}}
                       onClick={() =>setColor(item.color)}
                     >

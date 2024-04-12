@@ -1,14 +1,13 @@
 import React from 'react'
-import { Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from '../pages';
 import Login from '../pages/Auth/Login';
 import Register from '../pages/Auth/Register';
 import PrivateRoutes from './PrivateRoutes';
 
 
-const Routes = () => {
+const Routing = () => {
   return (
-    <div>
         <Routes>
               {/* Auth */}
                 <Route path='/login' element={<Login />} />
@@ -41,10 +40,9 @@ const Routes = () => {
                 <Route path="/pyramid" element={<Pyramid />} />
                 <Route path="/stacked" element={<Stacked />} />
             </Route>
-
-            </Routes>
-    </div>
+          </Routes>
+    
   )
 }
 
-export default Routes
+export default Routing

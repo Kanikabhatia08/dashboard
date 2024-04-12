@@ -17,20 +17,13 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, initializeUser); //if user logs in or logs out
-        // console.log(unsubscribe,"unsubscribe")
-        return unsubscribe; //also used for clean up clean up what??
+        return unsubscribe; 
     }, []);
 
     async function initializeUser(user) {
         if (user) {
             setCurrentUser({ ...user });
-            // console.log(user,"user")
-            // // check if provider is email and password login
-            // const isEmail = user.providerData.some(
-            //     (provider) => provider.providerId === "password"
-            // );
             setUserLoggedIn(true);
-            // setIsEmailUser(isEmail);
         } 
         else {
             setCurrentUser(null);

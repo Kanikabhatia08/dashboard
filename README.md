@@ -9,3 +9,6 @@
 
 # Snapshot of the Dashboard
 ![dashboard](dashboard.png)
+
+# Snapshot of the Login Page
+![login](login.png)
