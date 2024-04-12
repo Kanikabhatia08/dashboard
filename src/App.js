@@ -1,16 +1,14 @@
-import React, { lazy, Suspense, } from "react";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { FiSettings } from "react-icons/fi";
 import { Navbar, Sidebar, ThemeSettings } from './components';
-import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor } from './pages';
 import { useStateContext } from "./contexts/ContextProvider";
+import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-
-const Login = React.lazy(() => import('./pages/Auth/Login'));
+import { AuthProvider } from "./contexts/AuthContext";
+import PrivateRoutes from "./components/PrivateRoutes";
 
 function App() {
 
@@ -20,8 +18,7 @@ function App() {
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
 
-      <GoogleOAuthProvider
-            clientId="536748339139-geljnnfq9lm5vc3141knh6qv4edni0va.apps.googleusercontent.com">
+      <AuthProvider>
         <div className="flex relative dark:bg-main-dark-bg">
           <div className="fixed right-4 bottom-4 z-10">
             <TooltipComponent content="Settings" position="Top">
@@ -55,13 +52,14 @@ function App() {
             
             <Routes>
               {/* Auth */}
-              <Route path='/login' element={<Login />} />
-              <Route path="/register" element={(<Register />)} />
+                <Route path='/login' element={<Login />} />
+                <Route path="/register" element={(<Register />)} />
 
-
+            <Route element={<PrivateRoutes/>}>
+    
               {/* Dashboard */}
-              <Route path='/' element={<Ecommerce />} />
-              <Route path="/ecommerce" element={(<Ecommerce />)} />
+                <Route path='/' element={<Ecommerce />} />
+                <Route path="/ecommerce" element={(<Ecommerce />)} />
 
                 {/* pages  */}
                 <Route path="/orders" element={<Orders />} />
@@ -83,12 +81,13 @@ function App() {
                 <Route path="/color-mapping" element={<ColorMapping />} />
                 <Route path="/pyramid" element={<Pyramid />} />
                 <Route path="/stacked" element={<Stacked />} />
+            </Route>
 
             </Routes>
           </div>
         </div>
         </div>
-        </GoogleOAuthProvider>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );

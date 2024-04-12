@@ -7,7 +7,6 @@ const initialState = {
     cart: false,
     userProfile: false,
     notification: false,
-
 }
 
 export const ContextProvider = ({children}) =>{
@@ -26,8 +25,6 @@ export const ContextProvider = ({children}) =>{
     const [currentColor, setCurrentColor] = useState(getColor());
     const [currentMode, setCurrentMode] = useState(getTheme());
     const [themeSettings, setThemeSettings] = useState(false);
-    const [userObject, setUserObject] = useState('')
-    console.log(activeMenu)
 
     const handleClick = (clicked) =>{
         setIsClicked({...initialState, [clicked] : [!clicked] })
@@ -51,7 +48,7 @@ export const ContextProvider = ({children}) =>{
             value = {
                 {
                     activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick,
-                    currentColor, setCurrentColor, currentMode, setCurrentMode, userObject, setUserObject,
+                    currentColor, setCurrentColor, currentMode, setCurrentMode, 
                     themeSettings, setThemeSettings, setMode, setColor,setScreenSize, screenSize
                 }
             }>

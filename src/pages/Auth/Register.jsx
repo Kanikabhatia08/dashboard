@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Link, useNavigate} from 'react-router-dom'
+import { Link, Navigate} from 'react-router-dom'
 import { jwtDecode } from 'jwt-decode'
 import { GoogleLogin } from '@react-oauth/google';
 import login from '../../data/login.png'
 import { useStateContext } from '../../contexts/ContextProvider';
 import toast from 'react-hot-toast';
+import { doCreateUserWithEmailAndPassword } from '../../Firebase/auth';
+import { useAuth } from '../../contexts/AuthContext';
 
 
 const Register = () => {
@@ -13,26 +15,41 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [isRegistering, setIsRegistering] = useState(false)
     const {currentcolor, setUserObject} = useStateContext();
+    const [errorMessage, setErrorMessage] = useState('')
 
-    const navigate = useNavigate()
+    const { userLoggedIn } = useAuth()
     
-    const onSubmit = async(e) =>{
-        e.preventDefault();
-        if(email.length === 0 ){
-            toast.error("Enter Email")
+    const onSubmit = async (e) => {
+        e.preventDefault()
+        if(email.length == 0){
+            setErrorMessage("Enter Email");
+            setIsRegistering(false);
+        }
+        if(password.length == 0){
+            setErrorMessage("Enter Password");
+            setIsRegistering(false);
+        }
+        if(password.length < 6 || password.length > 20){
+            setErrorMessage("Password should be between 6-20 characters");
+            setIsRegistering(false);
+        }
 
+        try{
+            if(!isRegistering) {
+                setIsRegistering(true)
+                await doCreateUserWithEmailAndPassword(email, password)
+            }
         }
-        if(password.length === 0 ){
-            toast.error("Enter Password")
+        catch(error){
+            setErrorMessage(error.message)
+            setIsRegistering(false)
         }
-        else{
-            setIsRegistering(true)
-            localStorage.setItem('userLoggedIn', JSON.stringify(isRegistering));
-        }
-
+        
     }
 return (
     <div className='w-[90%] mx-auto justify-center flex gap-8 '>
+        {userLoggedIn && (<Navigate to={'/ecommerce'} replace={true} />)}
+
         <div>
             <img src={login} alt='login' loading='lazy' />
         </div>
@@ -74,28 +91,9 @@ return (
                         {isRegistering ? 'Registering In...' : 'Register'}
                 </button>
 
-                <div className='flex flex-row text-center w-full'>
-                    <div className='border-b-2 border-gray-300 mb-2.5 mr-2 w-full'></div><div className='text-sm dark:text-gray-300 font-bold w-fit'>OR</div><div className='border-b-2 border-gray-300 mb-2.5 ml-2 w-full'></div>
-                </div>
-
-                <div  className=" py-2">
-                <GoogleLogin
-                    onSuccess={credentialResponse => {
-                        console.log("login Successful")
-                        console.log(credentialResponse);
-                        setIsRegistering(true);
-                        navigate("/ecommerce");
-                        var user = jwtDecode(credentialResponse.credential)
-                        setUserObject(user);
-                    }
-                }
-
-                    onError={() => {
-                        console.log('Login Failed');
-                    }
-                }   
-                />
-                </div>
+               {errorMessage && (
+                    <span className='text-red-600 font-bold'>{errorMessage}</span>
+                )}
             </form>
 
         </div>

@@ -7,9 +7,9 @@ import { BsChatLeft } from 'react-icons/bs';
 import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
-import {useNavigate} from 'react-router-dom'
 import { Cart, Chat, Notification, UserProfile } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
+import { useAuth } from '../contexts/AuthContext';
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -29,7 +29,8 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Navbar = () => {
-  const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize, userObject } = useStateContext();
+  const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
+  const {userLoggedIn, currentUser} = useAuth();
   
   useEffect(() => {
     const handleResize = () => {
@@ -54,9 +55,6 @@ const Navbar = () => {
   }, [screenSize]);
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
-
-  const userLoggedIn = JSON.parse(localStorage.getItem('userLoggedIn'));
-  const navigate = useNavigate();
 
   return (
     <div>
@@ -90,13 +88,13 @@ const Navbar = () => {
                 >
                   <img
                     className="rounded-full w-8 h-8"
-                    src={userObject? userObject.picture : user}
+                    src={ currentUser.photoURL ?? user}
                     alt="user-profile"
                   />
                   <p>
                     <span className="text-gray-400 text-14">Hi,</span>{' '}
                     <span className="text-gray-400 font-bold ml-1 text-14">
-                      {userObject.name}
+                      {currentUser.displayName && currentUser.email}
                     </span>
                   </p>
                   <MdKeyboardArrowDown className="text-gray-400 text-14" />

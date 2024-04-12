@@ -5,6 +5,7 @@ import { MdOutlineCancel } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { links } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
+import { useAuth } from '../contexts/AuthContext';
 
 const Sidebar = () => {
   const {activeMenu, setActiveMenu, screenSize, currentColor} = useStateContext();
@@ -17,7 +18,7 @@ const Sidebar = () => {
       setActiveMenu(false);
     }
   }
-  const userLoggedIn = JSON.parse(localStorage.getItem('userLoggedIn'));
+  const { userLoggedIn } = useAuth()
 
   
   return (

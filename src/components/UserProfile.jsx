@@ -4,18 +4,15 @@ import { Button } from '.';
 import user from '../data/user.jpeg'
 import { userProfileData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
+import { doSignOut } from '../Firebase/auth';
+import { useAuth } from '../contexts/AuthContext';
 
 
 const UserProfile = () => {
-  const { currentColor, userObject,setActiveMenu } = useStateContext();
-  const navigate = useNavigate();
-
-  const logout = () =>{
-      localStorage.setItem('userLoggedIn', JSON.stringify('false'));
-      setActiveMenu(false);
-      navigate('/login');
-  }
+  const { currentColor, userObject } = useStateContext();
+  const {currentUser} = useAuth()
+  console.log(currentUser,"details")
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -32,12 +29,12 @@ const UserProfile = () => {
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
         <img
           className="rounded-full h-24 w-24"
-          src={userObject? userObject.picture : user}
+          src={currentUser.photoURL ?? user }
           alt="user-profile"
         />
         <div>
-          <p className="font-semibold text-xl dark:text-gray-200"> {userObject? userObject.name : 'User'}</p>
-          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {userObject? userObject.email : 'email'} </p>
+          <p className="font-semibold text-xl dark:text-gray-200"> {currentUser.displayName ?? 'user' }</p>
+          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {currentUser.email} </p>
         </div>
       </div>
       <div>
@@ -64,7 +61,9 @@ const UserProfile = () => {
             type="button"
             style={{ backgroundColor: currentColor }}
             className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full p-4"
-            onClick={logout}
+            onClick={() => { doSignOut().then(() => { 
+              <Navigate to={'/login'} replace={true}/> ;
+          }) }}
           >
             Logout
           </button>
