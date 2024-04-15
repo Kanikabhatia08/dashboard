@@ -29,12 +29,13 @@ export function AuthProvider({ children }) {
             setCurrentUser(null);
             setUserLoggedIn(false);
         }
-        setLoading(false);
+        setLoading(false);                                                                                                                                                                                                                      
     }
 
     const value = {
         userLoggedIn,
         isEmailUser,
+        setIsEmailUser,
         isGoogleUser,
         currentUser,
         setCurrentUser

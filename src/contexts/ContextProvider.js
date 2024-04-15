@@ -22,7 +22,6 @@ export const ContextProvider = ({children}) =>{
         return '#1A97F5'
     }
 
-
     const [activeMenu, setActiveMenu] = useState(false);
     const [isClicked, setIsClicked] = useState(initialState);
     const [screenSize, setScreenSize] = useState(initialState);
@@ -30,8 +29,8 @@ export const ContextProvider = ({children}) =>{
     const [currentMode, setCurrentMode] = useState(getTheme());
     const [themeSettings, setThemeSettings] = useState(false);
 
-    const handleClick = (clicked) => {
-        setIsClicked({ ...isClicked, [clicked]: !isClicked[clicked] });
+    const handleClick = (clicked, e) => {
+        setIsClicked({ ...initialState, [clicked]: true });
     };
 
     const setMode = (e) =>{

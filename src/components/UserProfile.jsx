@@ -11,7 +11,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
-  const {currentUser} = useAuth()
+  const {currentUser, isEmailUser} = useAuth()
   // console.log(currentUser,"details")
 
   return (
@@ -33,7 +33,7 @@ const UserProfile = () => {
           alt="user-profile"
         />
         <div>
-          <p className="font-semibold text-xl dark:text-gray-200"> {currentUser.displayName ?? 'user' }</p>
+          <p className="font-semibold text-xl dark:text-gray-200"> {currentUser.displayName ?? isEmailUser }</p>
           <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {currentUser.email} </p>
         </div>
       </div>

@@ -30,7 +30,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 
 const Navbar = () => {
   const { currentColor, activeMenu, setActiveMenu, handleClick, setIsClicked, isClicked, setScreenSize, screenSize } = useStateContext();
-  const {userLoggedIn, currentUser} = useAuth();
+  const {userLoggedIn, currentUser, isEmailUser} = useAuth();
   
   useEffect(() => {
     const handleResize = () => {
@@ -60,7 +60,6 @@ const Navbar = () => {
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (ProfileRef.current && !ProfileRef.current.contains(event.target) ) {
-        // console.log(ProfileRef.current)
         setIsClicked({
           cart: false,
           chat: false,
@@ -76,13 +75,13 @@ const Navbar = () => {
   });
 
   return (
-    <div ref={ProfileRef}>
+    <div >
       {
         userLoggedIn ?
         <>
           <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative" >
             <NavButton title="Menu"  customFunc={handleActiveMenu}  color={currentColor} icon={<AiOutlineMenu />} />
-            <div className="flex">
+            <div className="flex" ref={ProfileRef}>
               <NavButton 
                 title="Cart" 
                 customFunc={() => handleClick('cart')} 
@@ -95,16 +94,16 @@ const Navbar = () => {
                 color={currentColor} icon={<BsChatLeft />} 
               />
                 <NavButton 
-                  title="Notification" 
-                  dotColor="rgb(254, 201, 15)" 
-                  customFunc={() => handleClick('notification')} 
-                  color={currentColor} icon={<RiNotification3Line />} 
-                />
+                    title="Notification" 
+                    dotColor="rgb(254, 201, 15)" 
+                    customFunc={(e) => handleClick('notification', e)} 
+                    color={currentColor} icon={<RiNotification3Line />} 
+                  />
               
               <TooltipComponent content="Profile" position="BottomCenter">
                 <div
                   className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-                  onClick={() => handleClick('userProfile')}
+                  onClick={(e) => handleClick('userProfile')}
                 >
                   <img
                     className="rounded-full size-8"
@@ -114,7 +113,7 @@ const Navbar = () => {
                   <p>
                     <span className="text-gray-400 text-14">Hi,</span>{' '}
                     <span className="text-gray-400 font-bold ml-1 text-14">
-                      {currentUser.displayName ?? currentUser.email}
+                      {currentUser.displayName ?? isEmailUser}
                     </span>
                   </p>
                   <MdKeyboardArrowDown className="text-gray-400 text-14" />

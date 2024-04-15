@@ -14,7 +14,7 @@ const Register = () => {
     const {currentColor} = useStateContext();
     const [errorMessage, setErrorMessage] = useState('')
 
-    const { userLoggedIn } = useAuth()
+    const { userLoggedIn, setIsEmailUser } = useAuth()
     
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -30,11 +30,11 @@ const Register = () => {
             setErrorMessage("Password should be between 6-20 characters");
             setIsRegistering(false);
         }
-
         try{
             if(!isRegistering) {
-                setIsRegistering(true)
-                await doCreateUserWithEmailAndPassword(email, password)
+                setIsRegistering(true);
+                await doCreateUserWithEmailAndPassword(email, password);
+                setIsEmailUser(name)
             }
         }
         catch(error){
